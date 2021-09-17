@@ -6,15 +6,36 @@
     ... a showcase of the Storyblok Kotlin Multiplatform Client SDK. (Android, JVM, JS, iOS, ...)
 </p>
 
-Minimal **Kotlin Multiplatform** project with Jetpack Compose, Compose for Desktop, Compose for Web, and Kotlin/JS + React clients along with Ktor backend. Currently running on
+-------
+
+<p align="center">
+    <a href="#whats-included-">What's included 🚀</a> &bull;
+    <a href="#about-storyblok">About Storyblok</a> &bull;
+    <a href="#building">Building 🛠️</a> &bull;
+    <a href="#credits">Credits</a> &bull;
+    <a href="#license">License 📓</a>
+</p>
+
+-------
+
+### What's included 🚀
+
+Minimal **Kotlin Multiplatform** project showcasing the [Storyblok Kotlin Multiplatform SDK](https://github.com/mikepenz/storyblok-mp-SDK). Currently running on
 * Android (Jetpack Compose)
 * Wear OS (Jetpack Compose)
 * Desktop (Compose for Desktop)
 * Web (Compose for Web)
-* Web (Kotlin/JS + React Wrapper) (contributed by https://github.com/PatilShreyas)
+* Web (Kotlin/JS + React Wrapper)
 
+-------
 
-### Building
+## About Storyblok
+- **WEBSITE** https://www.storyblok.com/
+- **API DOC** https://www.storyblok.com/docs/api/content-delivery
+
+-------
+
+## Building
 
 You need to use Android Studio Arctic Fox (**note: Java 11 is now the minimum version required**).
 
@@ -58,17 +79,6 @@ This client is available in `compose-desktop` module.  Note that you need to use
 
 </p>
 </details>
-
-
-### Languages, libraries and tools used
-
-* [Kotlin](https://kotlinlang.org/)
-* [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
-* [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
-* [Ktor client library](https://github.com/ktorio/ktor)
-* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
-* [Koin](https://github.com/InsertKoinIO/koin)
-* [Jetpack Compose](https://developer.android.com/jetpack/compose)
 
 ## Credits
 
