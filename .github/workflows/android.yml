@@ -41,7 +41,7 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: Build Debug
-        run: ./gradlew app:assembleDebug
+        run: ./gradlew app:clean app:assembleDebug
 
       - name: Collect artifacts
         run: |
