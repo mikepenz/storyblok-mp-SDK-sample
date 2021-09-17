@@ -6,10 +6,9 @@ pluginManagement {
     }
 }
 
-rootProject.name = "PeopleInSpace"
+rootProject.name = "storyblok-mp-SDK-sample"
 
 include(":app", ":common", ":compose-desktop")
 include(":web")
 include(":compose-web")
-include(":backend")
 include(":wearApp")

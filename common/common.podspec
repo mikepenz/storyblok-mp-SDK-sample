@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'common'
     spec.version                  = '1.0'
-    spec.homepage                 = 'https://github.com/joreilly/PeopleInSpace'
+    spec.homepage                 = 'https://github.com/mikepenz/storyblok-mp-SDK-sample'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'PeopleInSpace'
+    spec.summary                  = 'Storyblok-mp-SDK-sample'
 
     spec.vendored_frameworks      = "build/cocoapods/framework/common.framework"
     spec.libraries                = "c++"

@@ -10,6 +10,7 @@ object Versions {
     const val ktor = "1.6.3"
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxHtmlJs = "0.7.3"
+    const val storyblok = "1.0.1"
 
     const val compose = "1.1.0-alpha04"
     const val wearCompose = "1.0.0-alpha06"
@@ -22,9 +23,9 @@ object Versions {
     const val mockito = "3.11.2"
     const val robolectric = "4.6.1"
 
-    const val sqlDelight = "1.5.0"
     const val shadow = "7.0.0"
     const val kotlinterGradle = "3.4.5"
+    const val buildkonfig = "0.9.0"
 
     const val material = "1.4.0"
     const val activityCompose = "1.3.1"
@@ -49,7 +50,7 @@ object Deps {
         const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         const val kotlinter = "org.jmailen.gradle:kotlinter-gradle:${Versions.kotlinterGradle}"
         const val shadow = "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:${Versions.shadow}"
-        const val sqlDelight = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
+        const val buildkonfig = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:${Versions.buildkonfig}"
     }
 
     object Kotlinx {
@@ -96,7 +97,12 @@ object Deps {
         const val wearMaterial = "androidx.wear.compose:compose-material:${Versions.wearCompose}"
 
         const val coilCompose = "io.coil-kt:coil-compose:1.3.1"
-        const val accompanistNavigationAnimation =  "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
+        const val accompanistInsets = "com.google.accompanist:accompanist-insets:${Versions.accompanist}"
+        const val accompanistNavigationAnimation = "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
+    }
+
+    object StoryblokSdk {
+        const val core = "com.mikepenz:storyblok-mp-sdk:${Versions.storyblok}"
     }
 
     object Koin {
@@ -123,15 +129,6 @@ object Deps {
         const val clientCio = "io.ktor:ktor-client-cio:${Versions.ktor}"
         const val clientCurl = "io.ktor:ktor-client-curl:${Versions.ktor}"
         const val clientJs = "io.ktor:ktor-client-js:${Versions.ktor}"
-    }
-
-    object SqlDelight {
-        const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
-        const val coroutineExtensions = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
-        const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
-        const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
-        const val nativeDriverMacos = "com.squareup.sqldelight:native-driver-macosx64:${Versions.sqlDelight}"
-        const val sqliteDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
     }
 
     object React {

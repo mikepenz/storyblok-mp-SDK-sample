@@ -1,12 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
-    id("com.squareup.sqldelight")
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
+    id("com.codingfeline.buildkonfig")
 }
 
 // CocoaPods requires the podspec to have a version.
@@ -15,14 +16,11 @@ version = "1.0"
 android {
     compileSdk = Versions.androidCompileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
     defaultConfig {
         minSdk = Versions.androidMinSdk
         targetSdk = Versions.androidTargetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
@@ -35,6 +33,17 @@ android {
         create("testApi")
         create("testDebugApi")
         create("testReleaseApi")
+    }
+}
+
+buildkonfig {
+    packageName = "com.mikepenz.common"
+    defaultConfigs {
+        buildConfigField(com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING, "STORYBLOK_TOKEN", Properties().also {
+            if (rootProject.file("local.properties").exists()) {
+                it.load(rootProject.file("local.properties").inputStream())
+            }
+        }.getProperty("storyblok.token", null) ?: project.property("storyblok.token")?.toString() ?: "")
     }
 }
 
@@ -61,8 +70,8 @@ kotlin {
 
     cocoapods {
         // Configure fields required by CocoaPods.
-        summary = "PeopleInSpace"
-        homepage = "https://github.com/joreilly/PeopleInSpace"
+        summary = "Storyblok-mp-SDK-sample"
+        homepage = "https://github.com/mikepenz/storyblok-mp-SDK-sample"
     }
 
     js(IR) {
@@ -76,6 +85,10 @@ kotlin {
                 isForce = true
             }
 
+            with(Deps.StoryblokSdk) {
+                api(core)
+            }
+
             with(Deps.Ktor) {
                 implementation(clientCore)
                 implementation(clientJson)
@@ -85,11 +98,6 @@ kotlin {
 
             with(Deps.Kotlinx) {
                 implementation(serializationCore)
-            }
-
-            with(Deps.SqlDelight) {
-                implementation(runtime)
-                implementation(coroutineExtensions)
             }
 
             with(Deps.Koin) {
@@ -106,7 +114,6 @@ kotlin {
 
         sourceSets["androidMain"].dependencies {
             implementation(Deps.Ktor.clientAndroid)
-            implementation(Deps.SqlDelight.androidDriver)
         }
         sourceSets["androidTest"].dependencies {
             // having issue with following after update to Kotlin 1.5.21
@@ -118,25 +125,21 @@ kotlin {
 
         sourceSets["jvmMain"].dependencies {
             implementation(Deps.Ktor.clientJava)
-            implementation(Deps.SqlDelight.sqliteDriver)
             implementation(Deps.Log.slf4j)
         }
 
         sourceSets["iOSMain"].dependencies {
             implementation(Deps.Ktor.clientIos)
-            implementation(Deps.SqlDelight.nativeDriver)
         }
         sourceSets["iOSTest"].dependencies {
         }
 
         sourceSets["watchMain"].dependencies {
             implementation(Deps.Ktor.clientIos)
-            implementation(Deps.SqlDelight.nativeDriver)
         }
 
         sourceSets["macOSMain"].dependencies {
             implementation(Deps.Ktor.clientCurl)
-            implementation(Deps.SqlDelight.nativeDriverMacos)
         }
 
         sourceSets["jsMain"].dependencies {
@@ -151,15 +154,8 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-sqldelight {
-    database("PeopleInSpaceDatabase") {
-        packageName = "com.surrus.peopleinspace.db"
-        sourceFolders = listOf("sqldelight")
-    }
-}
-
 multiplatformSwiftPackage {
-    packageName("PeopleInSpace")
+    packageName("Storyblok-mp-SDK-sample")
     swiftToolsVersion("5.3")
     targetPlatforms {
         iOS { v("13") }

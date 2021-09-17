@@ -1,17 +1,19 @@
-import com.surrus.common.remote.Assignment
-import com.surrus.common.remote.IssPosition
-import components.*
+import com.mikepenz.storyblok.sdk.model.Story
+import components.StoryDetails
+import components.StoryList
+import components.Typography
 import components.materialui.AppBar
 import components.materialui.Card
 import components.materialui.Grid
 import components.materialui.Toolbar
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import kotlinx.css.margin
 import kotlinx.css.padding
 import kotlinx.css.px
 import react.*
-import react.dom.*
 import styled.css
 
 
@@ -20,21 +22,16 @@ val App = functionalComponent<RProps> {
     val appDependencies = useContext(AppDependenciesContext)
     val repository = appDependencies.repository
 
-    val (people, setPeople) = useState(emptyList<Assignment>())
-    val (issPosition, setIssPosition) = useState(IssPosition(0.0, 0.0))
-    val (selectedPerson, setSelectedPerson) = useState<Assignment?>(null)
+    val (story, setStory) = useState(emptyList<Story>())
+    val (selectedStory, setSelectedStory) = useState<Story?>(null)
 
     useEffectWithCleanup(dependencies = listOf()) {
         val mainScope = MainScope()
 
         mainScope.launch {
-            val people = repository.fetchPeople()
-            setPeople(people)
-            setSelectedPerson(people.first())
-
-            repository.pollISSPosition().collect {
-                setIssPosition(it)
-            }
+            val stories = repository.fetchStories()
+            setStory(stories)
+            setSelectedStory(stories.first())
         }
         return@useEffectWithCleanup { mainScope.cancel() }
     }
@@ -44,7 +41,7 @@ val App = functionalComponent<RProps> {
                 margin(0.px)
             }
             Toolbar {
-                Typography("h6", "People In Space")
+                Typography("h6", "Storyblok Sample")
             }
         }
 
@@ -66,11 +63,11 @@ val App = functionalComponent<RProps> {
                     md = 4
                     xs = 12
                 }
-                PeopleList(
-                    people = people,
-                    selectedPerson = selectedPerson,
+                StoryList(
+                    story = story,
+                    selectedStory = selectedStory,
                     onSelect = {
-                        setSelectedPerson(it)
+                        setSelectedStory(it)
                     }
                 )
             }
@@ -81,27 +78,16 @@ val App = functionalComponent<RProps> {
                     xs = 12
                 }
 
-                selectedPerson?.let { person ->
+                selectedStory?.let { story ->
                     Card {
                         css {
                             padding(16.px)
                         }
 
-                        PersonDetails(person)
+                        StoryDetails(story)
                     }
                 }
             }
-        }
-
-        if (issPosition.latitude != 0.0 && issPosition.longitude != 0.0) {
-            Space(16.px)
-            Typography("subtitle1", buildString {
-                append("ISS Position: ")
-                append("Latitude = ${issPosition.latitude}, ")
-                append("Longitude = ${issPosition.longitude}")
-            })
-            Space(4.px)
-            IssLocationMap(issPosition)
         }
     }
 }

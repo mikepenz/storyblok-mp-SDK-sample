@@ -7,7 +7,7 @@ android {
     compileSdk = Versions.androidCompileSdk
 
     defaultConfig {
-        applicationId = "com.surrus.peopleinspace"
+        applicationId = "com.mikepenz.storyblok"
         minSdk = Versions.androidMinSdk
         targetSdk = Versions.androidTargetSdk
 
@@ -70,6 +70,7 @@ dependencies {
         implementation(material)
         implementation(navigation)
         implementation(coilCompose)
+        implementation(accompanistInsets)
         implementation(accompanistNavigationAnimation)
         implementation(uiTooling)
     }

@@ -7,7 +7,7 @@ android {
     compileSdk = Versions.androidCompileSdk
 
     defaultConfig {
-        applicationId = "com.surrus.peopleinspace"
+        applicationId = "com.mikepenz.storyblok"
         minSdk = 25
         targetSdk = Versions.androidTargetSdk
     }

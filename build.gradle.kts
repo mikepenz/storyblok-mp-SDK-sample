@@ -13,9 +13,9 @@ buildscript {
         with(Deps.Gradle) {
             classpath(kotlin)
             classpath(kotlinSerialization)
-            classpath(sqlDelight)
             classpath(shadow)
             classpath(kotlinter)
+            classpath(buildkonfig)
         }
     }
 }
@@ -27,6 +27,5 @@ allprojects {
         google()
         mavenCentral()
         maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
-        maven(url = "https://jitpack.io")
     }
 }
